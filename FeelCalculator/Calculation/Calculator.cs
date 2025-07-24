@@ -31,25 +31,25 @@
 
         public double Calculate(out string mode)
         {
-            double apparent = CalculateSteadman();
+            double steadman = CalculateSteadman();
 
             if (Temperature <= 10)
             {
                 double windChill = CalculateWindChill();
-                if (windChill < apparent)
+                if (windChill < steadman)
                 {
                     mode = "Wind Chill";
                     return windChill;
                 }
-                else if (windChill > apparent)
+                else if (windChill > steadman)
                 {
-                    mode = "Apparent";
-                    return apparent;
+                    mode = "Steadman";
+                    return steadman;
                 }
                 else
                 {
-                    mode = "Apparent / Wind Chill";
-                    return apparent;
+                    mode = "Steadman / Wind Chill";
+                    return steadman;
                 }
             }
 
@@ -57,25 +57,25 @@
             {
                 double heatIndex = CalculateHeatIndex();
 
-                if (apparent > heatIndex)
+                if (steadman > heatIndex)
                 {
-                    mode = "Apparent";
-                    return apparent;
+                    mode = "Steadman";
+                    return steadman;
                 }
-                else if (apparent < heatIndex)
+                else if (steadman < heatIndex)
                 {
                     mode = "Heat Index";
                     return heatIndex;
                 }
                 else
                 {
-                    mode = "Apparent / Heat Index";
-                    return apparent;
+                    mode = "Steadman / Heat Index";
+                    return steadman;
                 }
             }
 
-            mode = "Apparent";
-            return apparent;
+            mode = "Steadman";
+            return steadman;
         }
 
         public double Calculate() => Calculate(out string ignored);
